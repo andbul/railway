@@ -36,11 +36,12 @@ public class User implements Serializable{
     @Column(name = "email", length = 16, unique = true)
     private String email;
 
+
     public User() {
     }
 
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -87,6 +88,7 @@ public class User implements Serializable{
     public String getEmail() {
         return email;
     }
+
 
     @Override
     public String toString() {

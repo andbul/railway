@@ -2,10 +2,10 @@ package repository;
 
 import daotest.User;
 import exception.UserNotFoundException;
+import util.JpaHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
 import javax.persistence.Query;
 
 /**
@@ -13,9 +13,7 @@ import javax.persistence.Query;
  */
 public class UserRepositoryImpl implements UserRepository {
 
-    private EntityManager manager = Persistence
-            .createEntityManagerFactory("RAILWAY")
-            .createEntityManager();
+    private EntityManager manager = JpaHelper.getManager();
 
     @Override
     public User create(){

@@ -1,5 +1,6 @@
 <html>
 <body>
-<h2>Hello World!</h2>
+Hello.
+Please <a href="/pages/login.jsp">SignIn</a>
 </body>
 </html>

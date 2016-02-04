@@ -1,7 +1,9 @@
-package entity;
+package java.daotest;
 
+import daotest.User;
 import org.junit.Test;
 import repository.UserRepository;
+import repository.UserRepositoryImpl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -9,21 +11,21 @@ import static org.junit.Assert.assertEquals;
  * Created by andrey on 03.02.16.
  */
 public class UserRepositoryTest {
-    UserRepository repository = new UserRepository();
+    UserRepository repository = new UserRepositoryImpl();
 
     @Test
-    public void testPersistenceRecord() throws Exception {
+    public void TestPersistenceRecord() throws Exception {
         //Create user
-        User user = new User();
+        User user = repository.create();
         user.setLogin("persistTUrLogin");
         user.setPassword("persistTUPswd");
         user.setName("persistTUName");
         user.setEmail("persistTUEmail");
         //Save user in db
-        repository.save(user);
+        repository.update(user);
 
         //Read user and check equals
-        User user1 = repository.get(user.getId());
+        User user1 = repository.read(user.getId());
         assertEquals(user,user1);
 
         //Delete user
@@ -31,14 +33,14 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void testFindByLoginRecord() throws Exception {
-        User user = new User();
+    public void TestFindByLoginRecord() throws Exception {
+        User user = repository.create();
         user.setLogin("loginTULogin");
         user.setPassword("loginTUPswd");
         user.setName("loginTUName");
         user.setEmail("loginTUEmail");
 
-        repository.save(user);
+        repository.update(user);
         User user1 = repository.findByLogin("loginTULogin");
 
         assertEquals(user,user1);
@@ -48,14 +50,14 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void testFindByLoginAndPasswordRecord() throws Exception {
-        User user = new User();
+    public void TestFindByLoginAndPasswordRecord() throws Exception {
+        User user = repository.create();
         user.setLogin("loginPassTULogin");
         user.setPassword("loginPassTUPswd");
         user.setName("loginPassTUName");
         user.setEmail("loginPassTUEmail");
 
-        repository.save(user);
+        repository.update(user);
         User user1 = repository.findByLoginAndPassword("loginPassTULogin", "loginPassTUPswd");
 
         assertEquals(user,user1);
@@ -65,14 +67,14 @@ public class UserRepositoryTest {
     }
 
     @Test
-    public void testFindByEmailRecord() throws Exception {
-        User user = new User();
+    public void TestFindByEmailRecord() throws Exception {
+        User user = repository.create();
         user.setLogin("emailTULogin");
         user.setPassword("emailTUPswd");
         user.setName("emailTUName");
         user.setEmail("emailTUEmail");
 
-        repository.save(user);
+        repository.update(user);
         User user1 = repository.findByEmail("emailTUEmail");
 
         assertEquals(user,user1);

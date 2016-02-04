@@ -1,4 +1,4 @@
-package entity;
+package daotest;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -19,7 +19,7 @@ public class User implements Serializable{
     @Id
     @GeneratedValue
     @Column(nullable = false)
-    private long id;
+    private Long id;
 
     @Column(name = "login", length = 16, unique = true)
     private String login;

@@ -1,6 +1,5 @@
-package java.daotest;
+package daotest;
 
-import daotest.User;
 import org.junit.Test;
 import repository.UserRepository;
 import repository.UserRepositoryImpl;

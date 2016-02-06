@@ -42,13 +42,13 @@ public class RegisterController extends HttpServlet {
 
         //Error page or success
         if (errmessage.isEmpty() && !password.isEmpty() && !login.isEmpty() && !email.isEmpty()) {
-            User user = repository.create();
+            User user = new User();
             user.setLogin(login);
             user.setPassword(password);
             user.setEmail(email);
             user.setName(name);
             user.setSurname(surname);
-            repository.update(user);
+            repository.create(user);;
         }
         else{
             req.setAttribute("errmessage", errmessage);

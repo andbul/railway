@@ -7,10 +7,10 @@ import java.io.Serializable;
  * Created by andrey on 04.02.16.
  */
 public interface GenericDAO<T, PK extends Serializable>{
-    T create();
+    void create(T entity);
     T read(PK id);
-    void update(T transientObject);
-    void delete(T persistentObject);
+    void update(T entity);
+    void delete(T entity);
     void delete(PK id);
 
 }

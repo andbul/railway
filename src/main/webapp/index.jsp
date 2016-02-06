@@ -1,6 +1,6 @@
 <html>
 <body>
 Hello.
-Please <a href="/pages/login.jsp">SignIn</a>
+Please <a href="/login/login.jsp">SignIn</a>
 </body>
 </html>

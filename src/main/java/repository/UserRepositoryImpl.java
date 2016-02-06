@@ -16,28 +16,26 @@ public class UserRepositoryImpl implements UserRepository {
     private EntityManager manager = JpaHelper.getManager();
 
     @Override
-    public User create(){
+    public void create(User entity) {
         manager.getTransaction().begin();
-        User user = new User();
-        manager.persist(user);
+        manager.persist(entity);
         manager.getTransaction().commit();
-        return user;
     }
 
     @Override
-    public User read(Long id){
+    public User read(String id){
         return manager.find(User.class, id);
     }
 
     @Override
-    public void update(User user){
+    public void update(User entity){
         manager.getTransaction().begin();
-        manager.persist(user);
+        manager.merge(entity);
         manager.getTransaction().commit();
     }
 
     @Override
-    public void delete(Long id){
+    public void delete(String id){
         manager.getTransaction().begin();
         User user = manager.find(User.class, id);
         manager.remove(user);
@@ -45,9 +43,9 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void delete(User user){
+    public void delete(User entity){
         manager.getTransaction().begin();
-        manager.remove(user);
+        manager.remove(entity);
         manager.getTransaction().commit();
     }
 

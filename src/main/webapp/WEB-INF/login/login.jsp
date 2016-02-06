@@ -19,6 +19,6 @@
                             </div>
                             <button type="submit" style="width: 100%; font-size:1.1em;" class="btn btn-large btn btn-success btn-lg btn-block" ><b>Login</b></button>
                         </form>
-                        Or <a href="register.jsp">Register</a>
+                        Or <a href="/register">Register</a>
                     </div>
 </div>

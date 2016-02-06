@@ -6,21 +6,13 @@
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
-    <servlet-name>LoginController</servlet-name>
-    <servlet-class>controller.LoginController</servlet-class>
-  </servlet>
-  <servlet>
     <servlet-name>RegisterController</servlet-name>
     <servlet-class>controller.RegisterController</servlet-class>
   </servlet>
 
   <servlet-mapping>
-    <servlet-name>LoginController</servlet-name>
-    <url-pattern>/LoginServlet</url-pattern>
-  </servlet-mapping>
-  <servlet-mapping>
     <servlet-name>RegisterController</servlet-name>
-    <url-pattern>/RegisterServlet</url-pattern>
+    <url-pattern>/register</url-pattern>
   </servlet-mapping>
 
   <jsp-config>
@@ -28,24 +20,53 @@
       <display-name>header_and_footer</display-name>
       <url-pattern>/WEB-INF/login/*</url-pattern>
       <url-pattern>/pages/*</url-pattern>
+      <url-pattern>/WEB-INF/errors/*</url-pattern>
+      <url-pattern>/user/*</url-pattern>
+      <url-pattern>/manager/*</url-pattern>
       <url-pattern>/admin/*</url-pattern>
       <page-encoding>UTF-8</page-encoding>
-      <include-prelude>/jspf/header.jspf</include-prelude>
-      <include-coda>/jspf/footer.jspf</include-coda>
+      <include-prelude>/WEB-INF/jspf/header.jspf</include-prelude>
+      <include-coda>/WEB-INF/jspf/footer.jspf</include-coda>
     </jsp-property-group>
   </jsp-config>
 
   <security-constraint>
 
     <web-resource-collection>
-      <web-resource-name>my webapp</web-resource-name>
+      <web-resource-name>Admin</web-resource-name>
       <url-pattern>/admin/*</url-pattern>
-      <http-method>GET</http-method>
-      <http-method>POST</http-method>
     </web-resource-collection>
 
     <auth-constraint>
       <role-name>admin</role-name>
+    </auth-constraint>
+
+  </security-constraint>
+
+  <security-constraint>
+
+    <web-resource-collection>
+      <web-resource-name>Manager</web-resource-name>
+      <url-pattern>/manager/*</url-pattern>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>admin</role-name>
+      <role-name>manager</role-name>
+    </auth-constraint>
+
+  </security-constraint>
+  <security-constraint>
+
+    <web-resource-collection>
+      <web-resource-name>User</web-resource-name>
+      <url-pattern>/user/*</url-pattern>
+    </web-resource-collection>
+
+    <auth-constraint>
+      <role-name>admin</role-name>
+      <role-name>manager</role-name>
+      <role-name>user</role-name>
     </auth-constraint>
 
   </security-constraint>
@@ -55,7 +76,7 @@
     <realm-name>JDBCRealm</realm-name>
     <form-login-config>
       <form-login-page>/WEB-INF/login/login.jsp</form-login-page>
-      <form-error-page>/WEB-INF/login/error.jsp</form-error-page>
+      <form-error-page>/WEB-INF/errors/error.jsp</form-error-page>
     </form-login-config>
   </login-config>
 

@@ -1,4 +1,4 @@
-package daotest;
+package entity;
 
 import javax.persistence.*;
 import java.io.Serializable;

@@ -1,6 +1,1 @@
-<html>
-<body>
-Hello.
-Please <a href="/login/login.jsp">SignIn</a>
-</body>
-</html>
+<%response.sendRedirect("/user/home.jsp");%>

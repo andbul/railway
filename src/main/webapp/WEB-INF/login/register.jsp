@@ -11,7 +11,7 @@
                             Registration  Form</span> </b>
     </div>
     <div class="panel-body" >
-        <form action="/RegisterServlet" method="post" >
+        <form action="/register" method="post" >
             <div class="form-group">
                 <label>User Login</label>
                 <input

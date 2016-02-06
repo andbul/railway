@@ -1,8 +1,10 @@
-package daotest;
+package entity;
 
 import org.junit.Test;
 import repository.UserRepository;
 import repository.UserRepositoryImpl;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 
@@ -89,4 +91,18 @@ public class UserRepositoryTest {
         //Delete user
         repository.delete(user.getLogin());
     }
+
+    @Test
+    public void TestRoleRecord() throws Exception {
+        User user = repository.findByLogin("admin");
+        Role role = user.getRoles().get(0);
+
+        assertEquals(role.getName(),"admin");
+    }
+
+    @Test
+    public void TestGetAll() throws Exception {
+        List<User> users = repository.findAll();
+    }
+
 }

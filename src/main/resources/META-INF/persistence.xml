@@ -7,7 +7,7 @@
 
     <persistence-unit name="RAILWAY" transaction-type="RESOURCE_LOCAL">
 
-        <class>daotest.User</class>
+        <class>entity.User</class>
         <properties>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/railway_db"/>

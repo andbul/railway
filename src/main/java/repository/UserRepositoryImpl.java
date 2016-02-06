@@ -1,12 +1,13 @@
 package repository;
 
-import daotest.User;
+import entity.User;
 import exception.UserNotFoundException;
 import util.JpaHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
+import java.util.List;
 
 /**
  * Created by andrey on 03.02.16.
@@ -58,7 +59,8 @@ public class UserRepositoryImpl implements UserRepository {
             return (User) query.getSingleResult();
         }
         catch (NoResultException e) {
-            throw new UserNotFoundException();
+            //throw new UserNotFoundException();
+            return null;
         }
     }
 
@@ -70,7 +72,8 @@ public class UserRepositoryImpl implements UserRepository {
                     .setParameter("email", email);
             return (User) query.getSingleResult();
         } catch (NoResultException e) {
-            throw new UserNotFoundException();
+            //throw new UserNotFoundException();
+            return null;
         }
     }
 
@@ -83,8 +86,16 @@ public class UserRepositoryImpl implements UserRepository {
                     .setParameter("password", password);
             return (User) query.getSingleResult();
         } catch (NoResultException e) {
-            throw new UserNotFoundException();
+            //throw new UserNotFoundException();
+            return null;
+
         }
     }
 
+    @Override
+    public List<User> findAll() {
+            Query query = manager
+                    .createQuery("SELECT u FROM User u");
+            return (List<User>) query.getResultList();
+    }
 }

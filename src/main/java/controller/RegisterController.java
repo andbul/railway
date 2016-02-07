@@ -1,20 +1,16 @@
 package controller;
 
-import service.UserService;
+import enums.CrudMethod;
 
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.Map;
 
 /**
  * Created by andrey on 04.02.16.
  */
-public class RegisterController extends HttpServlet {
-
-    private UserService service = new UserService();
+public class RegisterController extends UserController {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -24,8 +20,6 @@ public class RegisterController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        Map<String, String> params = ControllerHelper
-                .getNecessaryParamsMap(req,"login", "password","name","surname","email");
-        ControllerHelper.doPostOrPutUser(params,"create",req,resp);
+        doCrudMethod(CrudMethod.CREATE, req, resp, "login", "password","name","surname","email");
     }
 }

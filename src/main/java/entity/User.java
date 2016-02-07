@@ -26,7 +26,7 @@ public class User implements Serializable{
     @Column(name = "email", length = 16, unique = true)
     private String email;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany
     @JoinTable(name="users_roles",
             joinColumns = @JoinColumn(name="login", referencedColumnName="login"),
             inverseJoinColumns = @JoinColumn(name="role_name", referencedColumnName="name")
@@ -82,17 +82,6 @@ public class User implements Serializable{
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                " login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                ", name='" + name + '\'' +
-                ", surname='" + surname + '\'' +
-                ", email='" + email + '\'' +
-                '}';
     }
 
     @Override

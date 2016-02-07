@@ -1,11 +1,13 @@
 package controller;
 
+import enums.CrudMethod;
 import exception.DuplicateEmailException;
 import exception.DuplicateException;
 import exception.DuplicateLoginException;
 import service.UserService;
 
 import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -15,20 +17,25 @@ import java.util.Map;
 /**
  * Created by andrey on 07.02.16.
  */
-public abstract class ControllerHelper {
-    private final static UserService service = new UserService();
+public abstract class UserController extends HttpServlet{
 
-    public static void doPostOrPutUser(Map<String,String> params, String type,
-                                       HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected UserService service = new UserService();
+
+    public void doCrudMethod(CrudMethod type, HttpServletRequest req,
+                             HttpServletResponse resp, String...userFields) throws ServletException, IOException {
+
+        Map<String, String> params = getNecessaryParamsMap(req,userFields);
+
         try {
             switch (type){
-                case "update":
+                case UPDATE:
                     service.update(params);
                     break;
-                case "create":
+                case CREATE:
                     service.create(params);
                     break;
             }
+
             req.getRequestDispatcher("/WEB-INF/success/success.jsp").forward(req, resp);
         }
         catch (DuplicateLoginException e){
@@ -48,13 +55,12 @@ public abstract class ControllerHelper {
             req.getRequestDispatcher("/WEB-INF/errors/error.jsp").forward(req, resp);
         }
         catch (Exception e){
-            e.printStackTrace();
             req.setAttribute("err", "Unexpected exception");
             req.getRequestDispatcher("/WEB-INF/errors/error.jsp").forward(req, resp);
         }
     }
 
-    public static Map<String,String> getNecessaryParamsMap(HttpServletRequest req, String...params){
+    private Map<String,String> getNecessaryParamsMap(HttpServletRequest req, String...params){
         Map<String,String> paramMap = new HashMap<>();
 
         for (String param : params) {
@@ -63,5 +69,4 @@ public abstract class ControllerHelper {
 
         return paramMap;
     }
-
 }

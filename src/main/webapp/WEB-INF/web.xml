@@ -9,11 +9,38 @@
     <servlet-name>RegisterController</servlet-name>
     <servlet-class>controller.RegisterController</servlet-class>
   </servlet>
-
   <servlet-mapping>
     <servlet-name>RegisterController</servlet-name>
     <url-pattern>/register</url-pattern>
   </servlet-mapping>
+
+  <servlet>
+    <servlet-name>AdminShowUsersController</servlet-name>
+    <servlet-class>controller.admin.AdminShowUsersController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminShowUsersController</servlet-name>
+    <url-pattern>/admin/showusers</url-pattern>
+  </servlet-mapping>
+
+
+  <servlet>
+      <servlet-name>AdminCreateUsersController</servlet-name>
+      <servlet-class>controller.admin.AdminCreateUserController</servlet-class>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>AdminCreateUsersController</servlet-name>
+      <url-pattern>/admin/createuser</url-pattern>
+  </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>AdminUpdateUsersController</servlet-name>
+        <servlet-class>controller.admin.AdminUpdateUsersController</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>AdminUpdateUsersController</servlet-name>
+        <url-pattern>/admin/updateuser</url-pattern>
+    </servlet-mapping>
 
   <jsp-config>
     <jsp-property-group>

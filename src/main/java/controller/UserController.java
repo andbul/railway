@@ -24,58 +24,54 @@ public abstract class UserController {
     protected UserService service = new UserService();
 
     public void doCrudMethod(CrudMethod type, HttpServletRequest req,
-                             HttpServletResponse resp, String...userFields) throws ServletException, IOException {
+                             HttpServletResponse resp, String... userFields)
+            throws ServletException, IOException {
 
-        Map<String, String> params = getNecessaryParamsMap(req,userFields);
+        Map<String, String> params = getNecessaryParamsMap(req, userFields);
 
         try {
-            switch (type){
+            switch (type) {
                 case UPDATE:
                     service.update(params);
-                    LOGGER.info(req.getUserPrincipal().getName()+" update "+ params.get("login"));
+                    LOGGER.info(req.getUserPrincipal().getName() + " update " + params.get("login"));
                     break;
                 case CREATE:
                     service.create(params);
 
                     Principal user = req.getUserPrincipal();
                     if (user != null)
-                        LOGGER.info(req.getUserPrincipal().getName()+" create "+ params.get("login"));
+                        LOGGER.info(req.getUserPrincipal().getName() + " create " + params.get("login"));
                     else
-                        LOGGER.info("Guest"+" create "+ params.get("login"));
+                        LOGGER.info("Guest" + " create " + params.get("login"));
                     break;
             }
 
             req.getRequestDispatcher("/pages/success/success.jsp").forward(req, resp);
-        }
-        catch (DuplicateLoginException e){
+        } catch (DuplicateLoginException e) {
             LOGGER.debug(e.getMessage());
             req.setAttribute("err", "Login not unique");
             req.getRequestDispatcher("/pages/errors/error.jsp").forward(req, resp);
-        }
-        catch (DuplicateEmailException e){
+        } catch (DuplicateEmailException e) {
             LOGGER.debug(e.getMessage());
             req.setAttribute("err", "Email not unique");
             req.getRequestDispatcher("/pages/errors/error.jsp").forward(req, resp);
-        }
-        catch (DuplicateException e){
+        } catch (DuplicateException e) {
             LOGGER.debug(e.getMessage());
             req.setAttribute("err", "Login and Email are not unique");
             req.getRequestDispatcher("/pages/errors/error.jsp").forward(req, resp);
-        }
-        catch (IllegalArgumentException e){
-            LOGGER.warn("Dao exception",e);
+        } catch (IllegalArgumentException e) {
+            LOGGER.warn("Dao exception", e);
             req.setAttribute("err", "Some fields are incorrect");
             req.getRequestDispatcher("/pages/errors/error.jsp").forward(req, resp);
-        }
-        catch (Exception e){
-            LOGGER.error("Unexpected exception",e);
+        } catch (Exception e) {
+            LOGGER.error("Unexpected exception", e);
             req.setAttribute("err", "Unexpected exception");
             req.getRequestDispatcher("/pages/errors/error.jsp").forward(req, resp);
         }
     }
 
-    private Map<String,String> getNecessaryParamsMap(HttpServletRequest req, String...params){
-        Map<String,String> paramMap = new HashMap<>();
+    private Map<String, String> getNecessaryParamsMap(HttpServletRequest req, String... params) {
+        Map<String, String> paramMap = new HashMap<>();
 
         for (String param : params) {
             paramMap.put(param, req.getParameter(param));

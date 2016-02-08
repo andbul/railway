@@ -14,6 +14,6 @@ public class DuplicateException extends Exception {
 
     @Override
     public String getMessage() {
-        return "User with " +paramname + " : " + param + " already exists.";
+        return "User with " + paramname + " : " + param + " already exists.";
     }
 }

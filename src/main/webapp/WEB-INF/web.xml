@@ -5,23 +5,6 @@
 		 http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
   <display-name>Archetype Created Web Application</display-name>
-  <servlet>
-    <servlet-name>RegisterController</servlet-name>
-    <servlet-class>controller.guest.RegisterFrontController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>RegisterController</servlet-name>
-    <url-pattern>/register</url-pattern>
-  </servlet-mapping>
-
-  <servlet>
-    <servlet-name>AdminFrontController</servlet-name>
-    <servlet-class>controller.admin.AdminFrontController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>AdminFrontController</servlet-name>
-    <url-pattern>/adminpanel/*</url-pattern>
-  </servlet-mapping>
 
   <jsp-config>
     <jsp-property-group>
@@ -48,15 +31,6 @@
         <role-name>manager</role-name>
     </security-role>
 
-  <security-constraint>
-    <web-resource-collection>
-      <web-resource-name>Admin</web-resource-name>
-      <url-pattern>/adminpanel/*</url-pattern>
-    </web-resource-collection>
-    <auth-constraint>
-      <role-name>admin</role-name>
-    </auth-constraint>
-  </security-constraint>
 
   <security-constraint>
     <web-resource-collection>

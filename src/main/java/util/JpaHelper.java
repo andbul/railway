@@ -14,8 +14,7 @@ public class JpaHelper {
             manager = Persistence
                     .createEntityManagerFactory("RAILWAY")
                     .createEntityManager();
-        }
-        catch (Throwable e){
+        } catch (Throwable e) {
             throw new ExceptionInInitializerError(e);
         }
     }

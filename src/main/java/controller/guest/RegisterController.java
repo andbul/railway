@@ -14,12 +14,11 @@ import java.io.IOException;
 public class RegisterController extends UserController {
 
     protected void doGetRegister(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("/pages/login/register.jsp").forward(req,resp);
+        req.getRequestDispatcher("/pages/login/register.jsp").forward(req, resp);
     }
-
 
     protected void doPostCreate(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        doCrudMethod(CrudMethod.CREATE, req, resp, "login", "password","name","surname","email");
+        doCrudMethod(CrudMethod.CREATE, req, resp, "login", "password", "name", "surname", "email");
     }
 }

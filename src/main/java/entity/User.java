@@ -9,7 +9,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "user")
-public class User implements Serializable{
+public class User implements Serializable {
     @Id
     @Column(name = "login", length = 16, unique = true)
     private String login;
@@ -27,9 +27,9 @@ public class User implements Serializable{
     private String email;
 
     @ManyToMany
-    @JoinTable(name="users_roles",
-            joinColumns = @JoinColumn(name="login", referencedColumnName="login"),
-            inverseJoinColumns = @JoinColumn(name="role_name", referencedColumnName="name")
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "login", referencedColumnName = "login"),
+            inverseJoinColumns = @JoinColumn(name = "role_name", referencedColumnName = "name")
     )
     private List<Role> roles;
 

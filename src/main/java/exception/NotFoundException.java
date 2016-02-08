@@ -14,6 +14,6 @@ public class NotFoundException extends Exception {
 
     @Override
     public String getMessage() {
-        return "User with " +paramname + " : " + param + " not found.";
+        return "User with " + paramname + " : " + param + " not found.";
     }
 }

@@ -23,23 +23,25 @@ public class UserService {
 
     private UserRepository repository = new UserRepositoryImpl();
 
-    public List<User> getAll(){
+    public List<User> getAll() {
         return repository.findAll();
     }
-    public User getByLogin(String login){
+
+    public User getByLogin(String login) {
         return repository.findByLogin(login);
     }
+
     public void update(Map<String, String> params) throws UserNotFoundException, IllegalArgumentException {
         //Params reading
-        String login    = params.get("login");
+        String login = params.get("login");
         String password = params.get("password");
-        String email    = params.get("email");
-        String name     = params.get("name");
-        String surname  = params.get("surname");
+        String email = params.get("email");
+        String name = params.get("name");
+        String surname = params.get("surname");
         String[] rolenames;
 
         //Default role if null
-        if(!params.containsKey("roles"))
+        if (!params.containsKey("roles"))
             rolenames = new String[]{"user"};
         else
             rolenames = params.get("roles").split(" ");
@@ -69,23 +71,23 @@ public class UserService {
         //Try update
         try {
             repository.update(user);
-        }
-        catch (Exception e){
-            LOGGER.error("Dao exception while updating "+user.getLogin(),e);
+        } catch (Exception e) {
+            LOGGER.error("Dao exception while updating " + user.getLogin(), e);
             throw new IllegalArgumentException(e);
         }
     }
+
     public void create(Map<String, String> params) throws DuplicateException, IllegalArgumentException {
         //Params reading
-        String login    = params.get("login");
+        String login = params.get("login");
         String password = params.get("password");
-        String email    = params.get("email");
-        String name     = params.get("name");
-        String surname  = params.get("surname");
+        String email = params.get("email");
+        String name = params.get("name");
+        String surname = params.get("surname");
         String[] rolenames;
 
         //Default role if null
-        if(!params.containsKey("roles"))
+        if (!params.containsKey("roles"))
             rolenames = new String[]{"user"};
         else
             rolenames = params.get("roles").split(" ");
@@ -98,7 +100,7 @@ public class UserService {
             throw new DuplicateException("login and email", login + " " + email);
 
         if (userByLogin != null)
-            throw  new DuplicateLoginException("login", login);
+            throw new DuplicateLoginException("login", login);
 
         if (userByEmail != null)
             throw new DuplicateEmailException("email", email);
@@ -125,9 +127,8 @@ public class UserService {
         //Try create
         try {
             repository.create(user);
-        }
-        catch (Exception e){
-            LOGGER.error("Dao exception while creating "+user.getLogin(),e);
+        } catch (Exception e) {
+            LOGGER.error("Dao exception while creating " + user.getLogin(), e);
             throw new IllegalArgumentException(e);
         }
     }

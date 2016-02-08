@@ -9,7 +9,10 @@ import java.util.List;
  */
 public interface UserRepository extends GenericDAO<User, String> {
     User findByLogin(String login);
+
     User findByEmail(String email);
+
     User findByLoginAndPassword(String login, String password);
+
     List<User> findAll();
 }

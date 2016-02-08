@@ -1,6 +1,9 @@
 package controller.admin;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.HttpConstraint;
+import javax.servlet.annotation.ServletSecurity;
+import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,15 +14,18 @@ import java.io.IOException;
  * Created by andrey on 08.02.16.
  */
 
+@WebServlet("/adminpanel/*")
+@ServletSecurity(@HttpConstraint(rolesAllowed = {"admin"}))
 public class AdminFrontController extends HttpServlet {
 
-    AdminController adminController = new AdminController();
+    private AdminController adminController = new AdminController();
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp)
+            throws ServletException, IOException {
         String path = req.getPathInfo();
 
-        switch (path){
+        switch (path) {
             case "/create":
                 adminController.doPostCreate(req, resp);
 
@@ -35,12 +41,12 @@ public class AdminFrontController extends HttpServlet {
         String path = req.getPathInfo();
 
         //Default forwarding to menu
-        if(path.equals("/") || path == null)
+        if (path.equals("/") || path == null)
             path = "/menu";
 
-        switch (path){
+        switch (path) {
             case "/menu":
-                req.getRequestDispatcher("/pages/admin/menu.jsp").forward(req,resp);
+                req.getRequestDispatcher("/pages/admin/menu.jsp").forward(req, resp);
                 break;
             case "/create":
                 adminController.doGetCreate(req, resp);

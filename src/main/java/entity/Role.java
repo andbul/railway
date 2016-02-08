@@ -9,7 +9,7 @@ import java.util.List;
  */
 @Entity
 @Table(name = "role")
-public class Role implements Serializable{
+public class Role implements Serializable {
     @Id
     @Column(name = "name", nullable = false, length = 16)
     private String name;

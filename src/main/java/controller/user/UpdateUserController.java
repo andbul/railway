@@ -15,6 +15,6 @@ public class UpdateUserController extends UserController {
 
     protected void doPost(HttpServletRequest req, HttpServletResponse resp)
             throws ServletException, IOException {
-        doCrudMethod(CrudMethod.UPDATE, req, resp, "login", "password","name","surname","email");
+        doCrudMethod(CrudMethod.UPDATE, req, resp, "login", "password", "name", "surname", "email");
     }
 }

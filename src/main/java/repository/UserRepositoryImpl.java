@@ -26,19 +26,19 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User read(String id){
+    public User read(String id) {
         return manager.find(User.class, id);
     }
 
     @Override
-    public void update(User entity){
+    public void update(User entity) {
         manager.getTransaction().begin();
         manager.merge(entity);
         manager.getTransaction().commit();
     }
 
     @Override
-    public void delete(String id){
+    public void delete(String id) {
         manager.getTransaction().begin();
         User user = manager.find(User.class, id);
         manager.remove(user);
@@ -46,27 +46,26 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void delete(User entity){
+    public void delete(User entity) {
         manager.getTransaction().begin();
         manager.remove(entity);
         manager.getTransaction().commit();
     }
 
     @Override
-    public User findByLogin(String login){
+    public User findByLogin(String login) {
         try {
             Query query = manager
                     .createQuery("SELECT u FROM User u WHERE u.login = :login")
                     .setParameter("login", login);
             return (User) query.getSingleResult();
-        }
-        catch (NoResultException e) {
+        } catch (NoResultException e) {
             return null;
         }
     }
 
     @Override
-    public User findByEmail(String email){
+    public User findByEmail(String email) {
         try {
             Query query = manager
                     .createQuery("SELECT u FROM User u WHERE u.email = :email")
@@ -78,7 +77,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User findByLoginAndPassword(String login, String password){
+    public User findByLoginAndPassword(String login, String password) {
         try {
             Query query = manager
                     .createQuery("SELECT u FROM User u WHERE u.login = :login AND u.password = :password")
@@ -93,8 +92,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public List<User> findAll() {
-            Query query = manager
-                    .createQuery("SELECT u FROM User u");
-            return (List<User>) query.getResultList();
+        Query query = manager
+                .createQuery("SELECT u FROM User u");
+        return (List<User>) query.getResultList();
     }
 }

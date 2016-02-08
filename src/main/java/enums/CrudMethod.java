@@ -5,5 +5,5 @@ package enums;
  */
 public enum CrudMethod {
     CREATE,
-    UPDATE;
+    UPDATE
 }

@@ -1,7 +1,7 @@
 package repository;
 
 import entity.User;
-import exception.UserNotFoundException;
+import org.apache.log4j.Logger;
 import util.JpaHelper;
 
 import javax.persistence.EntityManager;
@@ -13,6 +13,8 @@ import java.util.List;
  * Created by andrey on 03.02.16.
  */
 public class UserRepositoryImpl implements UserRepository {
+
+    private static final Logger LOGGER = Logger.getLogger(UserRepository.class);
 
     private EntityManager manager = JpaHelper.getManager();
 
@@ -51,7 +53,7 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public User findByLogin(String login) throws UserNotFoundException {
+    public User findByLogin(String login){
         try {
             Query query = manager
                     .createQuery("SELECT u FROM User u WHERE u.login = :login")
@@ -59,26 +61,24 @@ public class UserRepositoryImpl implements UserRepository {
             return (User) query.getSingleResult();
         }
         catch (NoResultException e) {
-            //throw new UserNotFoundException();
             return null;
         }
     }
 
     @Override
-    public User findByEmail(String email) throws UserNotFoundException {
+    public User findByEmail(String email){
         try {
             Query query = manager
                     .createQuery("SELECT u FROM User u WHERE u.email = :email")
                     .setParameter("email", email);
             return (User) query.getSingleResult();
         } catch (NoResultException e) {
-            //throw new UserNotFoundException();
             return null;
         }
     }
 
     @Override
-    public User findByLoginAndPassword(String login, String password) throws UserNotFoundException {
+    public User findByLoginAndPassword(String login, String password){
         try {
             Query query = manager
                     .createQuery("SELECT u FROM User u WHERE u.login = :login AND u.password = :password")
@@ -86,7 +86,6 @@ public class UserRepositoryImpl implements UserRepository {
                     .setParameter("password", password);
             return (User) query.getSingleResult();
         } catch (NoResultException e) {
-            //throw new UserNotFoundException();
             return null;
 
         }

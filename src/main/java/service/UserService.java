@@ -6,6 +6,7 @@ import exception.DuplicateEmailException;
 import exception.DuplicateException;
 import exception.DuplicateLoginException;
 import exception.UserNotFoundException;
+import org.apache.log4j.Logger;
 import repository.UserRepository;
 import repository.UserRepositoryImpl;
 
@@ -18,6 +19,8 @@ import java.util.Map;
  */
 public class UserService {
 
+    private static final Logger LOGGER = Logger.getLogger(UserService.class);
+
     private UserRepository repository = new UserRepositoryImpl();
 
     public List<User> getAll(){
@@ -26,7 +29,7 @@ public class UserService {
     public User getByLogin(String login){
         return repository.findByLogin(login);
     }
-    public void update(Map<String, String> params){
+    public void update(Map<String, String> params) throws UserNotFoundException, IllegalArgumentException {
         //Params reading
         String login    = params.get("login");
         String password = params.get("password");
@@ -44,7 +47,7 @@ public class UserService {
         //If user is not empty add cause to error message
         User user = repository.findByLogin(login);
         if (user == null)
-            throw new UserNotFoundException();
+            throw new UserNotFoundException("login", login);
 
         //Success!!! Necessary fields are uniq. Trying to create new user
         user.setPassword(password);
@@ -68,10 +71,11 @@ public class UserService {
             repository.update(user);
         }
         catch (Exception e){
-            new IllegalArgumentException("Some fields are corrupted");
+            LOGGER.error("Dao exception while updating "+user.getLogin(),e);
+            throw new IllegalArgumentException(e);
         }
     }
-    public void create(Map<String, String> params){
+    public void create(Map<String, String> params) throws DuplicateException, IllegalArgumentException {
         //Params reading
         String login    = params.get("login");
         String password = params.get("password");
@@ -91,13 +95,13 @@ public class UserService {
         User userByEmail = repository.findByEmail(email);
 
         if (userByLogin != null && userByEmail != null)
-            throw new DuplicateException();
+            throw new DuplicateException("login and email", login + " " + email);
 
         if (userByLogin != null)
-            throw  new DuplicateLoginException();
+            throw  new DuplicateLoginException("login", login);
 
         if (userByEmail != null)
-            throw new DuplicateEmailException();
+            throw new DuplicateEmailException("email", email);
 
         //Success!!! Necessary fields are uniq. Trying to create new user
         User user = new User();
@@ -123,8 +127,8 @@ public class UserService {
             repository.create(user);
         }
         catch (Exception e){
-            e.printStackTrace();
-            throw new IllegalArgumentException("Some fields are corrupted");
+            LOGGER.error("Dao exception while creating "+user.getLogin(),e);
+            throw new IllegalArgumentException(e);
         }
     }
 

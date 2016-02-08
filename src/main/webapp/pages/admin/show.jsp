@@ -23,7 +23,7 @@
             </c:forEach>
         </td>
         <td class="col-md-5">
-            <a class="btn btn-primary" href="/admin/updateuser?login=${user.login}"> Edit </a>
+            <a class="btn btn-primary" href="/adminpanel/update?login=${user.login}"> Edit </a>
         </td>
     </tr>
     </c:forEach>

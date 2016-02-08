@@ -7,7 +7,7 @@
   <display-name>Archetype Created Web Application</display-name>
   <servlet>
     <servlet-name>RegisterController</servlet-name>
-    <servlet-class>controller.RegisterController</servlet-class>
+    <servlet-class>controller.guest.RegisterFrontController</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>RegisterController</servlet-name>
@@ -15,32 +15,13 @@
   </servlet-mapping>
 
   <servlet>
-    <servlet-name>AdminShowUsersController</servlet-name>
-    <servlet-class>controller.admin.AdminShowUsersController</servlet-class>
+    <servlet-name>AdminFrontController</servlet-name>
+    <servlet-class>controller.admin.AdminFrontController</servlet-class>
   </servlet>
   <servlet-mapping>
-    <servlet-name>AdminShowUsersController</servlet-name>
-    <url-pattern>/admin/showusers</url-pattern>
+    <servlet-name>AdminFrontController</servlet-name>
+    <url-pattern>/adminpanel/*</url-pattern>
   </servlet-mapping>
-
-
-  <servlet>
-      <servlet-name>AdminCreateUsersController</servlet-name>
-      <servlet-class>controller.admin.AdminCreateUserController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-      <servlet-name>AdminCreateUsersController</servlet-name>
-      <url-pattern>/admin/createuser</url-pattern>
-  </servlet-mapping>
-    
-    <servlet>
-        <servlet-name>AdminUpdateUsersController</servlet-name>
-        <servlet-class>controller.admin.AdminUpdateUsersController</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>AdminUpdateUsersController</servlet-name>
-        <url-pattern>/admin/updateuser</url-pattern>
-    </servlet-mapping>
 
   <jsp-config>
     <jsp-property-group>
@@ -57,53 +38,60 @@
     </jsp-property-group>
   </jsp-config>
 
-  <security-constraint>
+    <security-role>
+        <role-name>admin</role-name>
+    </security-role>
+    <security-role>
+        <role-name>user</role-name>
+    </security-role>
+    <security-role>
+        <role-name>manager</role-name>
+    </security-role>
 
+  <security-constraint>
     <web-resource-collection>
       <web-resource-name>Admin</web-resource-name>
-      <url-pattern>/admin/*</url-pattern>
+      <url-pattern>/adminpanel/*</url-pattern>
     </web-resource-collection>
-
     <auth-constraint>
       <role-name>admin</role-name>
     </auth-constraint>
-
   </security-constraint>
 
   <security-constraint>
-
     <web-resource-collection>
       <web-resource-name>Manager</web-resource-name>
       <url-pattern>/manager/*</url-pattern>
     </web-resource-collection>
-
     <auth-constraint>
       <role-name>admin</role-name>
       <role-name>manager</role-name>
     </auth-constraint>
-
   </security-constraint>
-  <security-constraint>
 
+  <security-constraint>
     <web-resource-collection>
       <web-resource-name>User</web-resource-name>
       <url-pattern>/user/*</url-pattern>
+      <url-pattern>/pages/*</url-pattern>
     </web-resource-collection>
-
     <auth-constraint>
       <role-name>admin</role-name>
       <role-name>manager</role-name>
       <role-name>user</role-name>
     </auth-constraint>
-
   </security-constraint>
+
+  <welcome-file-list>
+    <welcome-file>/pages/index.jsp</welcome-file>
+  </welcome-file-list>
 
   <login-config>
     <auth-method>FORM</auth-method>
     <realm-name>JDBCRealm</realm-name>
     <form-login-config>
-      <form-login-page>/WEB-INF/login/login.jsp</form-login-page>
-      <form-error-page>/WEB-INF/errors/error.jsp</form-error-page>
+      <form-login-page>/pages/login/login.jsp</form-login-page>
+      <form-error-page>/pages/errors/error.jsp</form-error-page>
     </form-login-config>
   </login-config>
 

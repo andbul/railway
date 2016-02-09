@@ -2,9 +2,7 @@ package repository;
 
 import entity.User;
 import org.apache.log4j.Logger;
-import util.JpaHelper;
 
-import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.List;
@@ -12,45 +10,9 @@ import java.util.List;
 /**
  * Created by andrey on 03.02.16.
  */
-public class UserRepositoryImpl implements UserRepository {
+public class UserRepositoryImpl extends GenericDAOImpl<User,String> implements UserRepository {
 
     private static final Logger LOGGER = Logger.getLogger(UserRepository.class);
-
-    private EntityManager manager = JpaHelper.getManager();
-
-    @Override
-    public void create(User entity) {
-        manager.getTransaction().begin();
-        manager.persist(entity);
-        manager.getTransaction().commit();
-    }
-
-    @Override
-    public User read(String id) {
-        return manager.find(User.class, id);
-    }
-
-    @Override
-    public void update(User entity) {
-        manager.getTransaction().begin();
-        manager.merge(entity);
-        manager.getTransaction().commit();
-    }
-
-    @Override
-    public void delete(String id) {
-        manager.getTransaction().begin();
-        User user = manager.find(User.class, id);
-        manager.remove(user);
-        manager.getTransaction().commit();
-    }
-
-    @Override
-    public void delete(User entity) {
-        manager.getTransaction().begin();
-        manager.remove(entity);
-        manager.getTransaction().commit();
-    }
 
     @Override
     public User findByLogin(String login) {

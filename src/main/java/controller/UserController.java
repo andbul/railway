@@ -16,13 +16,23 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by andrey on 07.02.16.
+ * Abstract class used for working with users.
  */
 public abstract class UserController {
 
     private static final Logger LOGGER = Logger.getLogger(UserController.class);
     protected UserService service = new UserService();
 
+    /**
+     * Wrap request from controller and do one of CRUD operations.
+     * Forwarding req on success or error page.
+     * @param type one of CRUD methods
+     * @param req request ro controller
+     * @param resp response request to controller
+     * @param userFields name of params which you need to get from request
+     * @throws ServletException
+     * @throws IOException
+     */
     public void doCrudMethod(CrudMethod type, HttpServletRequest req,
                              HttpServletResponse resp, String... userFields)
             throws ServletException, IOException {
@@ -70,6 +80,12 @@ public abstract class UserController {
         }
     }
 
+    /**
+     * Get params from servlet request
+     * @param req request to controller
+     * @param params name of params which you need to get from request
+     * @return
+     */
     private Map<String, String> getNecessaryParamsMap(HttpServletRequest req, String... params) {
         Map<String, String> paramMap = new HashMap<>();
 

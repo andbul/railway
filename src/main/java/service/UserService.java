@@ -33,11 +33,11 @@ public class UserService {
 
     public void update(Map<String, String> params) throws UserNotFoundException, IllegalArgumentException {
         //Params reading
-        String login = params.get("login");
+        String login    = params.get("login");
         String password = params.get("password");
-        String email = params.get("email");
-        String name = params.get("name");
-        String surname = params.get("surname");
+        String email    = params.get("email");
+        String name     = params.get("name");
+        String surname  = params.get("surname");
         String[] rolenames;
 
         //Default role if null
@@ -79,11 +79,11 @@ public class UserService {
 
     public void create(Map<String, String> params) throws DuplicateException, IllegalArgumentException {
         //Params reading
-        String login = params.get("login");
+        String login    = params.get("login");
         String password = params.get("password");
-        String email = params.get("email");
-        String name = params.get("name");
-        String surname = params.get("surname");
+        String email    = params.get("email");
+        String name     = params.get("name");
+        String surname  = params.get("surname");
         String[] rolenames;
 
         //Default role if null
@@ -133,4 +133,19 @@ public class UserService {
         }
     }
 
+    public void delete(String login) throws UserNotFoundException {
+
+        //If user is not empty add cause to error message
+        User user = repository.findByLogin(login);
+        if (user == null)
+            throw new UserNotFoundException("login", login);
+
+        //Try update
+        try {
+            repository.delete(user.getLogin());
+        } catch (Exception e) {
+            LOGGER.error("Dao exception while deleting " + user.getLogin(), e);
+            throw new IllegalArgumentException(e);
+        }
+    }
 }

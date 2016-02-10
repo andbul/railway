@@ -35,13 +35,6 @@ public interface GenericDAO<T, PK extends Serializable> {
     void update(T entity);
 
     /**
-     * Delete managed entity
-     * @see javax.persistence.EntityManager#remove(Object)
-     * @param entity entity instance
-     */
-    void delete(T entity);
-
-    /**
      * Update managed entity
      * @see javax.persistence.EntityManager#find(Class, Object)
      * @see javax.persistence.EntityManager#remove(Object)

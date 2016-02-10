@@ -14,7 +14,6 @@ import static org.junit.Assert.assertEquals;
 public class UserRepositoryTest {
     UserRepository repository = new UserRepositoryImpl();
 
-
     @Test
     public void TestPersistenceRecord() throws Exception {
         //Create user

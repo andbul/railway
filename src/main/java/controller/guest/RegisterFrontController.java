@@ -8,12 +8,12 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Created by andrey on 08.02.16.
+ * Register front controller
  */
 @WebServlet("/register")
 public class RegisterFrontController extends HttpServlet {
 
-    RegisterController reg = new RegisterController();
+    private RegisterController reg = new RegisterController();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp)

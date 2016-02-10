@@ -1,25 +1,29 @@
 package util;
 
-import javax.persistence.EntityManager;
+import org.apache.log4j.Logger;
+
+import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
  * Created by andrey on 04.02.16.
  */
 public class JpaHelper {
-    private static final EntityManager manager;
+    private static final Logger LOGGER = Logger.getLogger(JpaHelper.class);
+    private static final EntityManagerFactory emf;
 
     static {
         try {
-            manager = Persistence
-                    .createEntityManagerFactory("RAILWAY")
-                    .createEntityManager();
+            emf = Persistence.createEntityManagerFactory("RAILWAY");
         } catch (Throwable e) {
+            LOGGER.fatal("Initialization Entity manager factory error");
             throw new ExceptionInInitializerError(e);
         }
     }
 
-    public static EntityManager getManager() {
-        return manager;
+
+    public static EntityManagerFactory getEmf() {
+        return emf;
     }
+
 }

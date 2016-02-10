@@ -11,9 +11,8 @@ import java.io.IOException;
 
 
 /**
- * Created by andrey on 08.02.16.
+ * Admin front controller
  */
-
 @WebServlet("/adminpanel/*")
 @ServletSecurity(@HttpConstraint(rolesAllowed = {"admin"}))
 public class AdminFrontController extends HttpServlet {

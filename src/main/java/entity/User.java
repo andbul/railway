@@ -91,7 +91,7 @@ public class User implements Serializable {
 
         User user = (User) o;
 
-        return login == user.login;
+        return login.equals(user.login);
 
     }
 }

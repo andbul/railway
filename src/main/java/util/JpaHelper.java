@@ -6,7 +6,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 /**
- * Created by andrey on 04.02.16.
+ * Jpa connection helper.
+ * Create a static EntityManagerFactory
  */
 public class JpaHelper {
     private static final Logger LOGGER = Logger.getLogger(JpaHelper.class);

@@ -1,7 +1,9 @@
 package exception;
 
 /**
- * Created by andrey on 03.02.16.
+ * The class {@code DuplicateException} and its subclasses are a form of
+ * {@code Exception} that indicates conditions that something in SQL request
+ * has same primary key.
  */
 public class DuplicateException extends Exception {
     private String paramname;

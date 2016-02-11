@@ -4,14 +4,11 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-/**
- * Created by andrey on 03.02.16.
- */
 @Entity
 @Table(name = "user")
 public class User implements Serializable {
     @Id
-    @Column(name = "login", length = 16, unique = true)
+    @Column(name = "login", length = 16, unique = true , nullable = false)
     private String login;
 
     @Column(name = "password", length = 16)
@@ -32,6 +29,9 @@ public class User implements Serializable {
             inverseJoinColumns = @JoinColumn(name = "role_name", referencedColumnName = "name")
     )
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Ticket> tickets;
 
     public User() {
     }
@@ -82,6 +82,14 @@ public class User implements Serializable {
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;
+    }
+
+    public List<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(List<Ticket> tickets) {
+        this.tickets = tickets;
     }
 
     @Override

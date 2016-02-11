@@ -1,7 +1,9 @@
 package exception;
 
 /**
- * Created by andrey on 03.02.16.
+ * The class {@code NotFoundException} and its subclasses are a form of
+ * {@code Exception} that indicates conditions that entity with
+ * that primary key does not exist.
  */
 public class NotFoundException extends Exception {
     private String paramname;
